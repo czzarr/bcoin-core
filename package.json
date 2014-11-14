@@ -1,0 +1,32 @@
+{
+  "name": "bcoin-core",
+  "version": "1.0.0",
+  "description": "Bitcoin protocol, block, tx and script",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec test/*.js"
+  },
+  "keywords": [
+    "bcoin",
+    "bitcoin",
+    "parser",
+    "framer",
+    "block",
+    "tx",
+    "transaction",
+    "script"
+  ],
+  "author": "Stanislas Marion <stanislas.marion@gmail.com> (http://github.com/czzarr)",
+  "license": "MIT",
+  "dependencies": {
+    "bcoin-utils": "^1.1.0",
+    "bitcoin-constants": "^1.2.0",
+    "bn.js": "^0.15.2",
+    "buffertools": "^2.1.2",
+    "elliptic": "^0.15.14",
+    "inherits": "^2.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  }
+}
