@@ -1,6 +1,6 @@
 var bcoin = exports
-bcoin.utils = require('bcoin-utils')
-bcoin.constants = require('bitcoin-constants')
+bcoin.constants = require('./lib/constants')
+bcoin.utils = require('./lib/utils')
 bcoin.protocol = require('./lib/protocol/')
 bcoin.script = require('./lib/script')
 bcoin.tx = require('./lib/tx')
