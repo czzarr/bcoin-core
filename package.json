@@ -22,6 +22,7 @@
     "bn.js": "^0.15.2",
     "buffertools": "^2.1.2",
     "elliptic": "^0.15.14",
+    "hash.js": "^0.3.2",
     "inherits": "^2.0.1",
     "xtend": "^4.0.0"
   },
