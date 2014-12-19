@@ -20,7 +20,7 @@ describe('Script', function() {
 
     it('should encode/decode numbers', function() {
         var testscript = [
-            []k
+            [],
             1,
             2,
             16
