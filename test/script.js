@@ -78,31 +78,31 @@ describe('Script', function() {
     it('should get an address from a P2PKH output script', function () {
       var hex = '76a914edbdd23480fbe8d11fdbf615147724d4da29fa7d88ac'
       var encoded = utils.toArray(hex, 'hex')
-      assert.equal(bcoin.script.getAddress(encoded, 'mainnet'), '1Ng4YU2e2H3E86syX2qrsmD9opBHZ42vCF')
+      assert.equal(bcoin.script.getAddresses(encoded, 'mainnet')[0], '1Ng4YU2e2H3E86syX2qrsmD9opBHZ42vCF')
     })
 
     it('should get an address from a P2PKH input script', function () {
       var hex = '493046022100bb3c194a30e460d81d34be0a230179c043a656f67e3c5c8bf47eceae7c4042ee0221008bf54ca11b2985285be0fd7a212873d243e6e73f5fad57e8eb14c4f39728b8c6014104e365859b3c78a8b7c202412b949ebca58e147dba297be29eee53cd3e1d300a6419bc780cc9aec0dc94ed194e91c8f6433f1b781ee00eac0ead2aae1e8e0712c6'
       var encoded = utils.toArray(hex, 'hex')
-      assert.equal(bcoin.script.getAddress(encoded, 'mainnet'), '127k9DmeZa7JAwxG2TPHTTMbnwP181vNYb');
+      assert.equal(bcoin.script.getAddresses(encoded, 'mainnet')[0], '127k9DmeZa7JAwxG2TPHTTMbnwP181vNYb');
     })
 
     it('should get the addresses of a Multisig output', function () {
       var hex = '5121033e81519ecf373ea3a5c7e1c051b71a898fb3438c9550e274d980f147eb4d069d2103fe4e6231d614d159741df8371fa3b31ab93b3d28a7495cdaa0cd63a2097015c752ae'
       var encoded = utils.toArray(hex, 'hex')
-      assert.deepEqual(bcoin.script.getAddress(encoded, 'mainnet'), [ '17Jm966AEWQqYDs4iMp2byMryhjUX4zHgT5qWzWxJVRM89Q343c', '18mESVGSgAqHerxdbYiqe1dpMYA35TpZqKFxWL7t2bz28ztaCvx' ])
+      assert.deepEqual(bcoin.script.getAddresses(encoded, 'mainnet'), [ '17Jm966AEWQqYDs4iMp2byMryhjUX4zHgT5qWzWxJVRM89Q343c', '18mESVGSgAqHerxdbYiqe1dpMYA35TpZqKFxWL7t2bz28ztaCvx' ])
     })
 
     it('should get an address from a P2PK output script', function () {
       var hex = '4104ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84cac'
       var encoded = utils.toArray(hex, 'hex')
-      assert.equal(bcoin.script.getAddress(encoded, 'mainnet'), '1Q2TWHE3GMdB6BZKafqwxXtWAWgFt5Jvm3')
+      assert.equal(bcoin.script.getAddresses(encoded, 'mainnet')[0], '1Q2TWHE3GMdB6BZKafqwxXtWAWgFt5Jvm3')
     })
 
     it('should get an address from a P2SH output script', function () {
       var hex = 'a9143e71b020e16a160f2fe9e17421800317ceddb8db87'
       var encoded = utils.toArray(hex, 'hex')
-      assert.equal(bcoin.script.getAddress(encoded, 'testnet3'), '2MxwQ5MjWJTqecb2nnawMH9eX6cjnb3HgND')
+      assert.equal(bcoin.script.getAddresses(encoded, 'testnet3')[0], '2MxwQ5MjWJTqecb2nnawMH9eX6cjnb3HgND')
     })
   })
 
