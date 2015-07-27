@@ -90,7 +90,7 @@ describe('Script', function() {
     it('should get the addresses of a Multisig output', function () {
       var hex = '5121033e81519ecf373ea3a5c7e1c051b71a898fb3438c9550e274d980f147eb4d069d2103fe4e6231d614d159741df8371fa3b31ab93b3d28a7495cdaa0cd63a2097015c752ae'
       var encoded = utils.toArray(hex, 'hex')
-      assert.deepEqual(bcoin.script.getAddresses(encoded, 'mainnet'), [ '17Jm966AEWQqYDs4iMp2byMryhjUX4zHgT5qWzWxJVRM89Q343c', '18mESVGSgAqHerxdbYiqe1dpMYA35TpZqKFxWL7t2bz28ztaCvx' ])
+      assert.deepEqual(bcoin.script.getAddresses(encoded, 'mainnet'), [ '1JXc8zsSeAPwqfAzLbBnZxNTfetZexH2bW', '14XufxyGiY6ZBJsFYHJm6awdzpJdtsP1i3' ])
     })
 
     it('should get an address from a P2PK output script', function () {
