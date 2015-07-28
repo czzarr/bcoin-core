@@ -104,6 +104,12 @@ describe('Script', function() {
       var encoded = utils.toArray(hex, 'hex')
       assert.equal(bcoin.script.getAddresses(encoded, 'testnet3')[0], '2MxwQ5MjWJTqecb2nnawMH9eX6cjnb3HgND')
     })
+
+    it('should get an address from a P2SH input script', function () {
+      var hex = '0047304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e605014830450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c014c69522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae'
+      var encoded = utils.toArray(hex, 'hex')
+      assert.equal(bcoin.script.getAddresses(encoded, 'mainnet')[0], '3Nw96PpfFoiM863pEvWXyKpee9TFdCEV5G')
+    })
   })
 
 });
