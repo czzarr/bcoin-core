@@ -76,6 +76,23 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert(bcoin.script.isNullData(decoded))
     })
+
+    it('should return the correct output type', function () {
+      var pubkeyhash = utils.toArray('76a914edbdd23480fbe8d11fdbf615147724d4da29fa7d88ac', 'hex')
+      assert.equal(bcoin.script.getOutputType(pubkeyhash), 'pubkeyhash')
+
+      var multisig = utils.toArray('5121033e81519ecf373ea3a5c7e1c051b71a898fb3438c9550e274d980f147eb4d069d2103fe4e6231d614d159741df8371fa3b31ab93b3d28a7495cdaa0cd63a2097015c752ae', 'hex')
+      assert.equal(bcoin.script.getOutputType(multisig), 'multisig1of2')
+
+      var pubkey = utils.toArray('4104ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84cac', 'hex')
+      assert.equal(bcoin.script.getOutputType(pubkey), 'pubkey')
+
+      var scripthash = utils.toArray('a9143e71b020e16a160f2fe9e17421800317ceddb8db87', 'hex')
+      assert.equal(bcoin.script.getOutputType(scripthash), 'scripthash')
+
+      var nulldata = utils.toArray('6a28590c080112220a1b353930632e6f7267282a5f5e294f7665726c6179404f7261636c65103b1a010c', 'hex')
+      assert.equal(bcoin.script.getOutputType(nulldata), 'nulldata')
+    })
   })
 
   describe('Address', function () {
