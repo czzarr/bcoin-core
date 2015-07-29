@@ -56,7 +56,11 @@ describe('Script', function() {
       var hex = '5121033e81519ecf373ea3a5c7e1c051b71a898fb3438c9550e274d980f147eb4d069d2103fe4e6231d614d159741df8371fa3b31ab93b3d28a7495cdaa0cd63a2097015c752ae'
       var encoded = utils.toArray(hex, 'hex')
       var decoded = bcoin.script.decode(encoded);
-      assert(bcoin.script.isMultisig(decoded))
+      var parsed = bcoin.script.isMultisig(decoded);
+      assert(parsed)
+      assert.equal(parsed.m, 1)
+      assert.equal(parsed.n, 2)
+      assert.equal(parsed.keys.length, 2)
     })
 
     it('should recognize a P2SH output', function () {
