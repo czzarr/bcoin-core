@@ -133,4 +133,47 @@ describe('Script', function() {
     })
   })
 
+  describe('AddressesByType', function () {
+    it('should get an address from a P2PKH output script', function () {
+      var hex = '76a914edbdd23480fbe8d11fdbf615147724d4da29fa7d88ac'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'pubkeyhash', is_output: true, network: 'mainnet' })[0], '1Ng4YU2e2H3E86syX2qrsmD9opBHZ42vCF')
+    })
+
+    it('should get an address from a P2PKH input script', function () {
+      var hex = '493046022100bb3c194a30e460d81d34be0a230179c043a656f67e3c5c8bf47eceae7c4042ee0221008bf54ca11b2985285be0fd7a212873d243e6e73f5fad57e8eb14c4f39728b8c6014104e365859b3c78a8b7c202412b949ebca58e147dba297be29eee53cd3e1d300a6419bc780cc9aec0dc94ed194e91c8f6433f1b781ee00eac0ead2aae1e8e0712c6'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'pubkeyhash', is_output: false, network: 'mainnet' })[0], '127k9DmeZa7JAwxG2TPHTTMbnwP181vNYb');
+    })
+
+    it('should get the addresses of a Multisig output script', function () {
+      var hex = '5121033e81519ecf373ea3a5c7e1c051b71a898fb3438c9550e274d980f147eb4d069d2103fe4e6231d614d159741df8371fa3b31ab93b3d28a7495cdaa0cd63a2097015c752ae'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.deepEqual(bcoin.script.getAddressesByType(decoded, { type: 'multisig1of2', is_output: true, network: 'mainnet' }), [ '1JXc8zsSeAPwqfAzLbBnZxNTfetZexH2bW', '14XufxyGiY6ZBJsFYHJm6awdzpJdtsP1i3' ])
+    })
+
+    it('should get an address from a P2PK output script', function () {
+      var hex = '4104ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84cac'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'pubkey', is_output: true, network: 'mainnet' })[0], '1Q2TWHE3GMdB6BZKafqwxXtWAWgFt5Jvm3')
+    })
+
+    it('should get an address from a P2SH output script', function () {
+      var hex = 'a914297c7fedc24ee78974b27a475c2e1522828b0a1087'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'scripthash', is_output: true, network: 'mainnet' })[0], '35UNmoRCafgXSpNL7y5U19GK67sbquPysA')
+    })
+
+    it('should get an address from a P2SH input script', function () {
+      var hex = '0047304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e605014830450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c014c69522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' })[0], '3Nw96PpfFoiM863pEvWXyKpee9TFdCEV5G')
+    })
+  })
 });
