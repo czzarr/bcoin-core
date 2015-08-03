@@ -208,11 +208,23 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: true, network: 'mainnet' }), 'OP_HASH160 297c7fedc24ee78974b27a475c2e1522828b0a10 OP_EQUAL')
     })
-    it('should get a readable scripthash input script which is just some sigs and a redeem script', function () {
+    it('should get a readable scripthash input script which is just 0, some sigs and a redeem script', function () {
       var hex = '0047304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e605014830450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c014c69522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae'
       var encoded = utils.toArray(hex, 'hex')
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' }), '0 304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e60501 30450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c01 522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae')
+    })
+    it('should get a readable multisig output script', function () {
+      var hex = '522102c08786d63f78bd0a6777ffe9c978cf5899756cfc32bfad09a89e211aeb926242210209655ca6743d5dfe2facf533a23189fdd3c3d872ca5423127b060b9a2e7c690f21029ca7b8445a9f2f189ea59ef28eb13dac2ac8a43916a25c80c0f01ad1f2a33a9553ae'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'multisig', is_output: true, network: 'mainnet' }), '2 02c08786d63f78bd0a6777ffe9c978cf5899756cfc32bfad09a89e211aeb926242 0209655ca6743d5dfe2facf533a23189fdd3c3d872ca5423127b060b9a2e7c690f 029ca7b8445a9f2f189ea59ef28eb13dac2ac8a43916a25c80c0f01ad1f2a33a95 3 OP_CHECKMULTISIG')
+    })
+    it('should get a readable multisig input script which is just 0 and some sigs', function () {
+      var hex = '0047304402203df44d9c876f7720edd5fee125f90398e1d9a86f87b39c3d75042e5588be53a902207baea45de0697e84ee93f6ff72f15a4ca15f49cad11cf1bf320ab2dff0e5a69c01'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'multisig', is_output: false, network: 'mainnet' }), '0 304402203df44d9c876f7720edd5fee125f90398e1d9a86f87b39c3d75042e5588be53a902207baea45de0697e84ee93f6ff72f15a4ca15f49cad11cf1bf320ab2dff0e5a69c01')
     })
   })
 });
