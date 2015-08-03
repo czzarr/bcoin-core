@@ -190,5 +190,17 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkey', is_output: false, network: 'mainnet' }), '304402207e41f15bd61d41160e229b9e95a5e54db4f1b19f30cb1e613a6ac11e10e8f78b02203929356876ea16a5837290391a8fa40c3bb7c393f118633e2cebe38ab175613201')
     })
+    it('should get a readable pubkeyhash output script', function () {
+      var hex = '76a9147c691afeb3e8c895681eadb5bef3372d1669683a88ac'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkeyhash', is_output: true, network: 'mainnet' }), 'OP_DUP OP_HASH160 7c691afeb3e8c895681eadb5bef3372d1669683a OP_EQUALVERIFY OP_CHECKSIG')
+    })
+    it('should get a readable pubkeyhash input script which is just a sig and a public key', function () {
+      var hex = '483045022100e1e2e12e93d1beb3a0cf9f41310eef67bff28c793b747806144121db06acc4140220647e60db1e90965a94046bba63b84ffb38aa91a8b4b15edefbb38cf717d43abf012103fdf80176d061b65ba551305d788790c6433e67817aa2490151752eba9d25c19c'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkeyhash', is_output: false, network: 'mainnet' }), '3045022100e1e2e12e93d1beb3a0cf9f41310eef67bff28c793b747806144121db06acc4140220647e60db1e90965a94046bba63b84ffb38aa91a8b4b15edefbb38cf717d43abf01 03fdf80176d061b65ba551305d788790c6433e67817aa2490151752eba9d25c19c')
+    })
   })
 });
