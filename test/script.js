@@ -226,5 +226,11 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'multisig', is_output: false, network: 'mainnet' }), '0 304402203df44d9c876f7720edd5fee125f90398e1d9a86f87b39c3d75042e5588be53a902207baea45de0697e84ee93f6ff72f15a4ca15f49cad11cf1bf320ab2dff0e5a69c01')
     })
+    it('should get a readable nulldata output script', function () {
+      var hex = '6a1cd7801a2fd926c800c36e55c3bc81a5d169ad9ce5d63f958a4b97b17d'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'nulldata', is_output: true, network: 'mainnet' }), 'OP_RETURN d7801a2fd926c800c36e55c3bc81a5d169ad9ce5d63f958a4b97b17d')
+    })
   })
 });
