@@ -202,5 +202,17 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkeyhash', is_output: false, network: 'mainnet' }), '3045022100e1e2e12e93d1beb3a0cf9f41310eef67bff28c793b747806144121db06acc4140220647e60db1e90965a94046bba63b84ffb38aa91a8b4b15edefbb38cf717d43abf01 03fdf80176d061b65ba551305d788790c6433e67817aa2490151752eba9d25c19c')
     })
+    it('should get a readable scripthash output script', function () {
+      var hex = 'a914297c7fedc24ee78974b27a475c2e1522828b0a1087'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: true, network: 'mainnet' }), 'OP_HASH160 297c7fedc24ee78974b27a475c2e1522828b0a10 OP_EQUAL')
+    })
+    it('should get a readable scripthash input script which is just some sigs and a redeem script', function () {
+      var hex = '0047304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e605014830450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c014c69522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' }), '0 304402206cced6ca496b77a07a2165ebcc317b2ddf0ec9da06b904b45950ef6ef9b8bd1a0220661a7e7bb5dd3026fc04eb56fb8cd763bc3641bf68ec200f989e2ba931f5e60501 30450221008716b43c8ce99405872b3e880d1360537b6b94be379330b2e465a03f9a39f2c7022009ade368e3e4c63cd6a86c55cd3132a6734cf379f78ef944f28b97d62e2e7c5c01 522103cce1be5634b7ec9790190842de4520ff6c2cea47179e7e9156be97ecd243a7d221024242188a92825c68e40ae5cb6a7d3794b8c3cb67ea8abfdd8a177c778f3dd98d21036bb2981d405883d432ad74742c1aecc24a858b4639bedf2c3f15f3512ddd091753ae')
+    })
   })
 });
