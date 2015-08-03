@@ -176,4 +176,19 @@ describe('Script', function() {
       assert.equal(bcoin.script.getAddressesByType(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' })[0], '3Nw96PpfFoiM863pEvWXyKpee9TFdCEV5G')
     })
   })
+
+  describe('Get readable scripts', function () {
+    it('should get a readable pubkey output script', function () {
+      var hex = '2103d68f90ba81455256cb7a0df14fb3930d6df61393207f2f3e71659414d296e0f0ac'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkey', is_output: true, network: 'mainnet' }), '03d68f90ba81455256cb7a0df14fb3930d6df61393207f2f3e71659414d296e0f0 OP_CHECKSIG')
+    })
+    it('should get a readable pubkey input script which is just a sig', function () {
+      var hex = '47304402207e41f15bd61d41160e229b9e95a5e54db4f1b19f30cb1e613a6ac11e10e8f78b02203929356876ea16a5837290391a8fa40c3bb7c393f118633e2cebe38ab175613201'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'pubkey', is_output: false, network: 'mainnet' }), '304402207e41f15bd61d41160e229b9e95a5e54db4f1b19f30cb1e613a6ac11e10e8f78b02203929356876ea16a5837290391a8fa40c3bb7c393f118633e2cebe38ab175613201')
+    })
+  })
 });
