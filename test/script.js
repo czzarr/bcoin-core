@@ -232,5 +232,23 @@ describe('Script', function() {
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, { type: 'nulldata', is_output: true, network: 'mainnet' }), 'OP_RETURN d7801a2fd926c800c36e55c3bc81a5d169ad9ce5d63f958a4b97b17d')
     })
+    it('should get a readable non standard script', function () {
+      var hex = 'aa206fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d619000000000087'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, {}), 'OP_HASH256 6fe28c0ab6f1b372c1a6a246ae63f74f931e8365e15a089c68d6190000000000 OP_EQUAL')
+    })
+    it('should get a readable non standard script', function () {
+      var hex = '51'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, {}), '1')
+    })
+    it('should get a readable non standard script', function () {
+      var hex = '6a'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.equal(bcoin.script.getReadableScript(decoded, {}), 'OP_RETURN')
+    })
   })
 });
