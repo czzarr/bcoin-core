@@ -31,13 +31,15 @@ describe('Script', function() {
       assert.deepEqual(decoded, testscript);
   });
 
-  it('should decode this fucking tx', function () {
-    var encoded = [ 4, 255, 255, 0, 29, 1, 4, 69, 84, 104, 101, 32, 84, 105, 109, 101, 115, 32, 48, 51, 47, 74, 97, 110, 47, 50, 48, 48, 57, 32, 67, 104, 97, 110, 99, 101, 108, 108, 111, 114, 32, 111, 110, 32, 98, 114, 105, 110, 107, 32, 111, 102, 32, 115, 101, 99, 111, 110, 100, 32, 98, 97, 105, 108, 111, 117, 116, 32, 102, 111, 114, 32, 98, 97, 110, 107, 115, 255, 255, 255, 255, 1, 0, 242, 5, 42, 1, 0, 0, 0, 67, 65, 4, 103, 138, 253, 176, 254, 85, 72, 39, 25, 103, 241, 166, 113, 48, 183, 16, 92, 214, 168, 40, 224, 57, 9, 166, 121, 98, 224, 234, 31, 97, 222, 182, 73, 246, 188, 63, 76, 239, 56, 196, 243, 85, 4, 229, 30, 193, 18, 222, 92, 56, 77, 247, 186, 11, 141, 87, 138, 76, 112, 43, 107, 241, 29, 95, 172, 0, 0, 0, 0 ]
-    var decoded = bcoin.script.decode(encoded);
-    assert.deepEqual(bcoin.script.encode(decoded), encoded)
+  describe('Non-Standard Scripts', function () {
+    it('should decode this script', function () {
+      var encoded = [ 4, 255, 255, 0, 29, 1, 4, 69, 84, 104, 101, 32, 84, 105, 109, 101, 115, 32, 48, 51, 47, 74, 97, 110, 47, 50, 48, 48, 57, 32, 67, 104, 97, 110, 99, 101, 108, 108, 111, 114, 32, 111, 110, 32, 98, 114, 105, 110, 107, 32, 111, 102, 32, 115, 101, 99, 111, 110, 100, 32, 98, 97, 105, 108, 111, 117, 116, 32, 102, 111, 114, 32, 98, 97, 110, 107, 115, 255, 255, 255, 255, 1, 0, 242, 5, 42, 1, 0, 0, 0, 67, 65, 4, 103, 138, 253, 176, 254, 85, 72, 39, 25, 103, 241, 166, 113, 48, 183, 16, 92, 214, 168, 40, 224, 57, 9, 166, 121, 98, 224, 234, 31, 97, 222, 182, 73, 246, 188, 63, 76, 239, 56, 196, 243, 85, 4, 229, 30, 193, 18, 222, 92, 56, 77, 247, 186, 11, 141, 87, 138, 76, 112, 43, 107, 241, 29, 95, 172, 0, 0, 0, 0 ]
+      var decoded = bcoin.script.decode(encoded);
+      assert.deepEqual(bcoin.script.encode(decoded), encoded)
+    })
   })
 
-  describe('Scripts', function () {
+  describe('Standard Scripts', function () {
     it('should recognize a P2PKH output', function () {
       var hex = '76a914edbdd23480fbe8d11fdbf615147724d4da29fa7d88ac'
       var encoded = utils.toArray(hex, 'hex')
@@ -249,6 +251,20 @@ describe('Script', function() {
       var encoded = utils.toArray(hex, 'hex')
       var decoded = bcoin.script.decode(encoded);
       assert.equal(bcoin.script.getReadableScript(decoded, {}), 'OP_RETURN')
+    })
+    it('should get a readable non standard script hash', function () {
+      var hex = '510b04e7f16656b17551935287'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.deepEqual(decoded, [ 1, [ 4, 231, 241, 102, 86, 177, 117, 81, 147, 82, 135 ] ])
+      assert.equal(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' }), '1 04e7f16656b17551935287')
+    })
+    it('should get a readable non standard script hash', function () {
+      var hex = '5355540b6f93598893578893588851'
+      var encoded = utils.toArray(hex, 'hex')
+      var decoded = bcoin.script.decode(encoded);
+      assert.deepEqual(decoded, [ 3, 5, 4, [ 111, 147, 89, 136, 147, 87, 136, 147, 88, 136, 81 ] ])
+      assert.deepEqual(bcoin.script.getReadableScript(decoded, { type: 'scripthash', is_output: false, network: 'mainnet' }), '3 5 4 6f93598893578893588851')
     })
   })
 });
