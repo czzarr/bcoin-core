@@ -1,6 +1,6 @@
 {
   "name": "bcoin-core",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Bitcoin protocol, block, tx and script",
   "main": "index.js",
   "scripts": {
